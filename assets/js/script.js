@@ -16,21 +16,25 @@ $(document).ready(function() {
 
     var card = "<img src='./assets/img/philippine-map.png' class='leaflet--image'><b>This is the Philippines</b><br>Mabuhay, kumusta?";
 
-    marker.bindPopup(card).openPopup();
+    marker.bindPopup(card).closePopup();
+
+    marker.on('mouseover',function(ev) {
+        marker.openPopup();
+    });
+    marker.on('mouseleave', function(){
+        setTimeout(
+            function(){
+                // marker.closePopup();
+                console.log('hello')
+            }, 2000);
+    });
+
+    // to check the longlat in the map
 
     function onMapClick(e) {
         alert("You clicked the map at " + e.latlng);
     }
     
     map.on('click', onMapClick);
-
-    // var mymap = L.map('mapid').setView([12.8797, 121.7740], 5);
-
-    // L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    //     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    //     id: 'mapbox/streets-v11',
-    //     accessToken: 'pk.eyJ1IjoidW50YWxhbmxlbSIsImEiOiJjazYwY2czeWIwNm9qM2xwNHIzNzQzYWFnIn0.8uivTb-Vt-IpiSnfArbtlw',
-    // })
-    // .addTo(mymap);
 
 });
